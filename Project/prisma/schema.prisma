@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SupportPlan {
+  id           String   @id @default(cuid())
+  studentName  String
+  grade        Int
+  owner        String
+  concern      String
+  goal         String
+  nextReview   DateTime
+  status       Status   @default(ACTIVE)
+  priority     Priority @default(MEDIUM)
+  notes        String   @default("")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([status, nextReview])
+  @@index([owner])
+}
+
+enum Status {
+  ACTIVE
+  MONITORING
+  COMPLETED
+  ARCHIVED
+}
+
+enum Priority {
+  HIGH
+  MEDIUM
+  LOW
+}
