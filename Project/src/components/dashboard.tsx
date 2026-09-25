@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { SupportPlan, SupportPlanInput, UserRole, AiSuggestion } from "@/lib/types";
 import { ROLE_CONFIGS } from "@/lib/types";
+import Footer from "@/components/footer";
 
 const emptyForm: SupportPlanInput = {
   studentName: "",
@@ -653,6 +654,9 @@ export default function Dashboard({ initialPlans }: { initialPlans: SupportPlan[
           </div>
         )}
       </section>
+
+      {/* Application Footer with Author & Profile Attribution */}
+      <Footer onOpenGuide={() => setGuideModalOpen(true)} />
 
       {/* Floating Notice / Toast */}
       {notice && (
